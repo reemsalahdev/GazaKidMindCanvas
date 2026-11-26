@@ -1,0 +1,22 @@
+flowchart TD
+    A[Start] --> B[User Clicks Add Child]
+    B --> C[Open Add Child Drawer]
+    C --> D[Fill Child Information]
+    D --> E[Select Group]
+    E --> F[Add Medical History]
+    F --> G[Upload Profile Image]
+    G --> H{Validate Data}
+    H -->|Invalid| I[Show Validation Errors]
+    I --> D
+    H -->|Valid| J[Submit to Backend]
+    J --> K{Save to Database}
+    K -->|Error| L[Show Error Message]
+    L --> D
+    K -->|Success| M[Update Children List]
+    M --> N[Close Drawer]
+    N --> O[End]
+    
+    style A fill:#90caf9
+    style O fill:#90caf9
+    style H fill:#ffcc80
+    style K fill:#ffcc80

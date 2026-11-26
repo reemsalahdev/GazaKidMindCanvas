@@ -1,0 +1,29 @@
+graph TB
+    subgraph "Client Side (React)"
+        A[React App] --> B[Components]
+        B --> C[Auth Components]
+        B --> D[Dashboard Components]
+        B --> E[Children Management]
+        B --> F[Drawing Analysis]
+        A --> G[Services Layer]
+        G --> H[API Service]
+        G --> I[Auth Service]
+        G --> J[Business Services]
+    end
+    
+    subgraph "Server Side (Node.js/Express)"
+        K[Express Server] --> L[Routes]
+        L --> M[Auth Routes]
+        L --> N[Business Routes]
+        K --> O[Middleware]
+        O --> P[Auth Middleware]
+        O --> Q[Upload Middleware]
+        K --> R[Models]
+        R --> S[MongoDB]
+    end
+    
+    H -.-> K
+    
+    style A fill:#e1f5fe
+    style K fill:#fff3e0
+    style S fill:#f3e5f5

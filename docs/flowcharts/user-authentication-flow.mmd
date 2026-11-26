@@ -1,0 +1,18 @@
+flowchart TD
+    A[Start] --> B[User Enters Credentials]
+    B --> C{Validate Input}
+    C -->|Invalid| D[Show Error Message]
+    D --> B
+    C -->|Valid| E[Send Login Request]
+    E --> F{Check Credentials}
+    F -->|Invalid| G[Return Error]
+    G --> D
+    F -->|Valid| H[Generate JWT Token]
+    H --> I[Store Token & User Data]
+    I --> J[Redirect to Dashboard]
+    J --> K[End]
+    
+    style A fill:#90caf9
+    style K fill:#90caf9
+    style F fill:#ffcc80
+    style C fill:#ffcc80

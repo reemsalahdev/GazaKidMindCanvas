@@ -1,0 +1,25 @@
+flowchart TD
+    A[Start] --> B[Select Child]
+    B --> C[Open Drawing Upload]
+    C --> D[Choose Image File]
+    D --> E[Add Drawing Details]
+    E --> F[Upload Drawing]
+    F --> G{File Valid?}
+    G -->|No| H[Show Error]
+    H --> D
+    G -->|Yes| I[Save to Server]
+    I --> J[Trigger AI Analysis]
+    J --> K{Analysis Type}
+    K -->|Immediate| L[Call OpenAI API]
+    K -->|Batch| M[Queue for Analysis]
+    L --> N[Process Response]
+    M --> N
+    N --> O[Save Analysis Results]
+    O --> P[Generate Recommendations]
+    P --> Q[Update UI]
+    Q --> R[End]
+    
+    style A fill:#90caf9
+    style R fill:#90caf9
+    style G fill:#ffcc80
+    style K fill:#ffcc80

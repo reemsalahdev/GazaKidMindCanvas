@@ -1,0 +1,24 @@
+flowchart TD
+    A[Start] --> B[Select Child Profile]
+    B --> C[Load Recent Drawings]
+    C --> D{Drawings Available?}
+    D -->|No| E[Show No Data Message]
+    E --> F[End]
+    D -->|Yes| G[Gather Drawing Analyses]
+    G --> H[Check Analysis Status]
+    H --> I{All Analyzed?}
+    I -->|No| J[Analyze Pending Drawings]
+    J --> K[Compile Summaries]
+    I -->|Yes| K
+    K --> L[Send to OpenAI]
+    L --> M[Generate Recommendations]
+    M --> N[Categorize by Priority]
+    N --> O[Save to Database]
+    O --> P[Deactivate Old Recommendations]
+    P --> Q[Display Results]
+    Q --> F
+    
+    style A fill:#90caf9
+    style F fill:#90caf9
+    style D fill:#ffcc80
+    style I fill:#ffcc80

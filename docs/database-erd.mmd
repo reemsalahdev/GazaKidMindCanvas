@@ -1,0 +1,77 @@
+%%{init: {'theme':'default', 'themeVariables': {'primaryColor':'#fff', 'primaryTextColor':'#000', 'primaryBorderColor':'#000', 'lineColor':'#000'}}}%%
+erDiagram
+    USER {
+        ObjectId _id PK
+        string email UK
+        string password
+        string institutionName
+        number averageChildren
+        string licenseNumber
+        string address
+        string contactNumber
+        string logo
+        object openaiConfig
+        boolean isActive
+        string role
+        date createdAt
+        date updatedAt
+    }
+    
+    CHILD {
+        ObjectId _id PK
+        ObjectId user FK
+        string name
+        number age
+        string gender
+        string group
+        string favoriteColor
+        string profileImage
+        object additionalInfo
+        object emotionalStatus
+        object psychologicalIndicators
+        boolean isActive
+        date createdAt
+        date updatedAt
+    }
+    
+    DRAWING {
+        ObjectId _id PK
+        ObjectId child FK
+        ObjectId user FK
+        string imageUrl
+        string title
+        string description
+        object analysis
+        object context
+        array tags
+        boolean isAnalyzed
+        date analyzedAt
+        string status
+        string error
+        date createdAt
+        date updatedAt
+    }
+    
+    RECOMMENDATION {
+        ObjectId _id PK
+        ObjectId child FK
+        ObjectId user FK
+        string title
+        string description
+        string category
+        string priority
+        string type
+        array basedOnDrawings FK
+        array drawingSummaries
+        object generationMetadata
+        boolean isActive
+        date createdAt
+        date updatedAt
+    }
+    
+    USER ||--o{ CHILD : "manages"
+    USER ||--o{ DRAWING : "creates"
+    USER ||--o{ RECOMMENDATION : "generates"
+    CHILD ||--o{ DRAWING : "has"
+    CHILD ||--o{ RECOMMENDATION : "receives"
+    DRAWING }o--o{ RECOMMENDATION : "informs"

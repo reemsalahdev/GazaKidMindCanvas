@@ -1,0 +1,80 @@
+graph LR
+    %% Define styles
+    classDef entityStyle fill:#f9f9f9,stroke:#333,stroke-width:2px
+    
+    %% USER Entity
+    USER["<b>USER</b><br/><hr/>
+    <b>_id</b>: ObjectId (PK)<br/>
+    <i>email</i>: String (UK)<br/>
+    password: String<br/>
+    institutionName: String<br/>
+    averageChildren: Number<br/>
+    licenseNumber: String<br/>
+    address: String<br/>
+    contactNumber: String<br/>
+    logo: String<br/>
+    openaiConfig: Object<br/>
+    isActive: Boolean<br/>
+    role: String<br/>
+    createdAt: Date<br/>
+    updatedAt: Date"]:::entityStyle
+    
+    %% CHILD Entity
+    CHILD["<b>CHILD</b><br/><hr/>
+    <b>_id</b>: ObjectId (PK)<br/>
+    <u>user</u>: ObjectId (FK)<br/>
+    name: String<br/>
+    age: Number<br/>
+    gender: String<br/>
+    group: String<br/>
+    favoriteColor: String<br/>
+    profileImage: String<br/>
+    additionalInfo: Object<br/>
+    emotionalStatus: Object<br/>
+    psychologicalIndicators: Object<br/>
+    isActive: Boolean<br/>
+    createdAt: Date<br/>
+    updatedAt: Date"]:::entityStyle
+    
+    %% DRAWING Entity
+    DRAWING["<b>DRAWING</b><br/><hr/>
+    <b>_id</b>: ObjectId (PK)<br/>
+    <u>child</u>: ObjectId (FK)<br/>
+    <u>user</u>: ObjectId (FK)<br/>
+    imageUrl: String<br/>
+    title: String<br/>
+    description: String<br/>
+    analysis: Object<br/>
+    context: Object<br/>
+    tags: Array<br/>
+    isAnalyzed: Boolean<br/>
+    analyzedAt: Date<br/>
+    status: String<br/>
+    error: String<br/>
+    createdAt: Date<br/>
+    updatedAt: Date"]:::entityStyle
+    
+    %% RECOMMENDATION Entity
+    RECOMMENDATION["<b>RECOMMENDATION</b><br/><hr/>
+    <b>_id</b>: ObjectId (PK)<br/>
+    <u>child</u>: ObjectId (FK)<br/>
+    <u>user</u>: ObjectId (FK)<br/>
+    title: String<br/>
+    description: String<br/>
+    category: String<br/>
+    priority: String<br/>
+    type: String<br/>
+    <u>basedOnDrawings</u>: Array (FK)<br/>
+    drawingSummaries: Array<br/>
+    generationMetadata: Object<br/>
+    isActive: Boolean<br/>
+    createdAt: Date<br/>
+    updatedAt: Date"]:::entityStyle
+    
+    %% Relationships
+    USER ---|"manages<br/>1:N"| CHILD
+    USER ---|"creates<br/>1:N"| DRAWING
+    USER ---|"generates<br/>1:N"| RECOMMENDATION
+    CHILD ---|"has<br/>1:N"| DRAWING
+    CHILD ---|"receives<br/>1:N"| RECOMMENDATION
+    DRAWING ---|"informs<br/>M:N"| RECOMMENDATION
